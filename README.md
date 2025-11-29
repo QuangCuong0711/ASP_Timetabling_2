@@ -19,3 +19,7 @@ Em cần chạy 3 lần với dataset với độ lớn lần lượt là 600, 9
    ./run.sh 3
    ```
 3. Chạy xong kết quả sẽ lưu vào file filename_result.txt ạ
+
+### Chú ý :
+
+- Nếu code chạy quá lâu 5-6h -> Vô nghiệm hoặc sai data input
