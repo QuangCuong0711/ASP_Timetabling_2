@@ -110,11 +110,24 @@ print("Bắt đầu solve...")
 t2 = time.perf_counter()
 res = ctl.solve(on_model=on_model)
 t3 = time.perf_counter()
-print(f"Solve xong: {t3 - t2:.4f} giây | Tổng: {t3 - t0:.4f} giây")
+
+ground_time = t1 - t0
+solve_time  = t3 - t2
+total_time  = t3 - t0
+
+print(f"Solve xong: {solve_time:.4f} giây | Tổng: {total_time:.4f} giây")
+
+# --- Ghi thêm thời gian vào file kết quả ---
+with open(output_file, "a", encoding="utf-8") as f:
+    f.write("\n===== Thời gian chạy =====\n")
+    f.write(f"Grounding time: {ground_time:.4f} giây\n")
+    f.write(f"Solve time:     {solve_time:.4f} giây\n")
+    f.write(f"Total time:     {total_time:.4f} giây\n")
 
 # --- Trạng thái ---
 status = "UNKNOWN"
 if res.satisfiable: status = "SATISFIABLE"
 elif res.exhausted: status = "UNSATISFIABLE"
 elif res.interrupted: status = "UNKNOWN (Interrupted)"
+
 print(f"Status: {status}")
