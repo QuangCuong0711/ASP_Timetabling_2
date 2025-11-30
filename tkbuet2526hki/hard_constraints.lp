@@ -8,6 +8,8 @@ t(T)  :- lecturer(T,_,_).
 cl(CL):- class_course(_,CL).
 mr(MR):- mandatory_room(_,MR).
 
+course_id(S, CID, Type) :- course(S, CID, Type, _).
+
 % =========================================================
 
 room_building(R, B) :- room(R,_,_,B).                   
@@ -36,6 +38,9 @@ pair_class(S1, S2)   :- class_course(S1, C), class_course(S2, C), S1 != S2, S1 <
 :- cl(CL), d(D), ppd(P), 2 { ts(S,D,P) : class_course(S,CL) }.
 
 :- mr(MR), d(D), ppd(P), 2 { ts(S,D,P) : mandatory_room(S,MR) }.
+
+:- d(D), course_details(_, CID, Type), 
+   2 { ts(S, D, _) : course_details(S, CID, Type) }.
 
 % Ý nghĩa: Tại một phòng R, giờ D, P không được có quá 1 môn
 :- r(R), d(D), ppd(P), 2 { assigned(S,R,D,P) }.
